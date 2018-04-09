@@ -39,6 +39,7 @@ enum NVActivityIndicatorShape {
     case line
     case pacman
     case stroke
+    case creamsStroke
 
     // swiftlint:disable cyclomatic_complexity function_body_length
     func layerWith(size: CGSize, color: UIColor) -> CALayer {
@@ -152,8 +153,42 @@ enum NVActivityIndicatorShape {
             layer.fillColor = nil
             layer.strokeColor = color.cgColor
             layer.lineWidth = 2
+        case .creamsStroke:
+            
+            path.addArc(withCenter: CGPoint(x: size.width / 2, y: size.height / 2),
+                        radius: size.width / 2,
+                        startAngle: -(.pi / 2),
+                        endAngle: (.pi + .pi / 2) * 0.8,
+                        clockwise: true)
+            layer.fillColor = nil
+            layer.strokeColor = UIColor.green.cgColor
+            layer.lineWidth = 2
+            
+            let gradientLayer = CAGradientLayer()
+//            gradientLayer.shadowPath = path.cgPath
+            gradientLayer.frame = layer.bounds
+            gradientLayer.colors = [UIColor.white, UIColor.red]
+            gradientLayer.startPoint = CGPoint(x: 0, y: 1)
+            gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+            gradientLayer.mask = layer
+            
+//            circle.addSublayer(gradientLayer)
+            
+            
+            
+////            let maskLayer = CALayer()
+//            let bundle = Bundle(for: NVActivityIndicatorView.self)
+//            let url = bundle.url(forResource: "NVActivityIndicatorView", withExtension: "bundle")
+//            guard let _url = url else { break }
+//            let imageBundle = Bundle(url: _url)
+//            let path = imageBundle?.path(forResource: "angle-mask", ofType: "png")
+//            guard let _path = path else { break }
+////            layer.contents = UIImage(contentsOfFile: _path)?.cgImage
+////            maskLayer.frame = layer.bounds
+////            layer.mask = maskLayer
+//
         }
-
+        
         layer.backgroundColor = nil
         layer.path = path.cgPath
         layer.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)

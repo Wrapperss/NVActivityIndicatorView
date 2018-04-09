@@ -52,7 +52,7 @@ class NVActivityIndicatorAnimationCircleStrokeSpin: NVActivityIndicatorAnimation
         strokeStartAnimation.beginTime = beginTime
 
         let groupAnimation = CAAnimationGroup()
-        groupAnimation.animations = [rotationAnimation, strokeEndAnimation, strokeStartAnimation]
+        groupAnimation.animations = [rotationAnimation/*, strokeEndAnimation, strokeStartAnimation*/]
         groupAnimation.duration = strokeStartDuration + beginTime
         groupAnimation.repeatCount = .infinity
         groupAnimation.isRemovedOnCompletion = false
