@@ -75,6 +75,7 @@ class ViewController: UIViewController, NVActivityIndicatorViewable {
     @objc func buttonTapped(_ sender: UIButton) {
         let size = CGSize(width: 30, height: 30)
 
+        
         startAnimating(size, message: "Loading...", type: NVActivityIndicatorType.creamsCircleStroke)
 
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
