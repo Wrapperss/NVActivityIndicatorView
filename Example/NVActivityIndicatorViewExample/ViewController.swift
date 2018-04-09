@@ -82,7 +82,7 @@ class ViewController: UIViewController, NVActivityIndicatorViewable {
         }
 
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
-            self.stopAnimating()
+//            self.stopAnimating()
         }
     }
 }

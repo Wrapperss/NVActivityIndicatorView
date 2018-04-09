@@ -40,13 +40,13 @@ enum NVActivityIndicatorShape {
     case pacman
     case stroke
     case creamsStroke
-
+    
     // swiftlint:disable cyclomatic_complexity function_body_length
     func layerWith(size: CGSize, color: UIColor) -> CALayer {
         let layer: CAShapeLayer = CAShapeLayer()
         var path: UIBezierPath = UIBezierPath()
         let lineWidth: CGFloat = 2
-
+        
         switch self {
         case .circle:
             path.addArc(withCenter: CGPoint(x: size.width / 2, y: size.height / 2),
@@ -125,7 +125,7 @@ enum NVActivityIndicatorShape {
             layer.fillColor = color.cgColor
         case .triangle:
             let offsetY = size.height / 4
-
+            
             path.move(to: CGPoint(x: 0, y: size.height - offsetY))
             path.addLine(to: CGPoint(x: size.width / 2, y: size.height / 2 - offsetY))
             path.addLine(to: CGPoint(x: size.width, y: size.height - offsetY))
@@ -156,43 +156,20 @@ enum NVActivityIndicatorShape {
         case .creamsStroke:
             
             path.addArc(withCenter: CGPoint(x: size.width / 2, y: size.height / 2),
-                        radius: size.width / 2,
+                        radius: size.width / 2 - 1,
                         startAngle: -(.pi / 2),
-                        endAngle: (.pi + .pi / 2) * 0.8,
+                        endAngle: .pi + .pi / 2,
                         clockwise: true)
             layer.fillColor = nil
-            layer.strokeColor = UIColor.green.cgColor
+            layer.strokeColor = color.cgColor
             layer.lineWidth = 2
-            
-            let gradientLayer = CAGradientLayer()
-//            gradientLayer.shadowPath = path.cgPath
-            gradientLayer.frame = layer.bounds
-            gradientLayer.colors = [UIColor.white, UIColor.red]
-            gradientLayer.startPoint = CGPoint(x: 0, y: 1)
-            gradientLayer.endPoint = CGPoint(x: 1, y: 0)
-            gradientLayer.mask = layer
-            
-//            circle.addSublayer(gradientLayer)
-            
-            
-            
-////            let maskLayer = CALayer()
-//            let bundle = Bundle(for: NVActivityIndicatorView.self)
-//            let url = bundle.url(forResource: "NVActivityIndicatorView", withExtension: "bundle")
-//            guard let _url = url else { break }
-//            let imageBundle = Bundle(url: _url)
-//            let path = imageBundle?.path(forResource: "angle-mask", ofType: "png")
-//            guard let _path = path else { break }
-////            layer.contents = UIImage(contentsOfFile: _path)?.cgImage
-////            maskLayer.frame = layer.bounds
-////            layer.mask = maskLayer
-//
         }
         
         layer.backgroundColor = nil
         layer.path = path.cgPath
         layer.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-
+        
         return layer
     }
 }
+

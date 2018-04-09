@@ -19,7 +19,7 @@ class NVActivityIndicatorAnimationCreamsStroke: NVActivityIndicatorAnimationDele
         rotationAnimation.repeatCount = Float.infinity
         rotationAnimation.fillMode = kCAFillModeForwards
         rotationAnimation.autoreverses = false
-
+        
         let circle = NVActivityIndicatorShape.creamsStroke.layerWith(size: size, color: color)
         let frame = CGRect(
             x: (layer.bounds.width - size.width) / 2,
@@ -27,17 +27,19 @@ class NVActivityIndicatorAnimationCreamsStroke: NVActivityIndicatorAnimationDele
             width: size.width,
             height: size.height
         )
- 
+        
+        circle.frame = frame
+        
         let gradientLayer = CAGradientLayer()
-//                    gradientLayer.shadowPath = path.cgPath
-        gradientLayer.frame = layer.bounds
-        gradientLayer.colors = [UIColor.white, UIColor.red]
+        gradientLayer.colors = [color.cgColor, UIColor.clear.cgColor]
+        gradientLayer.locations = [NSNumber(value: 0.7), NSNumber(value: 0.95)]
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         gradientLayer.startPoint = CGPoint(x: 0, y: 1)
         gradientLayer.endPoint = CGPoint(x: 1, y: 0)
         gradientLayer.mask = circle
         
-        circle.frame = frame
-        circle.add(rotationAnimation, forKey: "animation")
-        layer.addSublayer(circle)
+        gradientLayer.add(rotationAnimation, forKey: "animation")
+        layer.addSublayer(gradientLayer)
     }
 }
+
