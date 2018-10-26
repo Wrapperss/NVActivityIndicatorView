@@ -16,10 +16,10 @@ class NVActivityIndicatorAnimationCreamsStroke: NVActivityIndicatorAnimationDele
         
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
         rotationAnimation.byValue = Float.pi * 2
-        rotationAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        rotationAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         rotationAnimation.duration = strokeStartDuration
         rotationAnimation.repeatCount = Float.infinity
-        rotationAnimation.fillMode = kCAFillModeForwards
+        rotationAnimation.fillMode = CAMediaTimingFillMode.forwards
         rotationAnimation.autoreverses = false
         
         let circle = NVActivityIndicatorShape.creamsStroke.layerWith(size: size, color: color)
